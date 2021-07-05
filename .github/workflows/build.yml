@@ -81,6 +81,7 @@ jobs:
 
     - name: Using Capacitor to generate android project
       run: |
+       rm -rf android || true
        npx cap init
        if [ $? -ne 0 ]; then
         npx cap init myReact com.nguoianphu.myReact --web-dir build
