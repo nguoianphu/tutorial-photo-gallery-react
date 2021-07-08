@@ -54,5 +54,10 @@ ionic build --prod
 
 __Optimization__
 ```
-ionic build --configuration production --aot=true --buildOptimizer=true --optimization=true --common-chunk=true --delete-output-path --source-map=false
+ionic build --configuration production \
+    --aot=true --buildOptimizer=true \
+    --optimization=true \
+    --common-chunk=true \
+    --delete-output-path \
+    --source-map=false
 ```
