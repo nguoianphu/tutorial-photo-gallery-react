@@ -86,13 +86,14 @@ jobs:
 
     - name: Using Capacitor to generate android project
       run: |
-       rm -rf android || true
+       git clean -df
        npx cap init
        if [ $? -ne 0 ]; then
         npx cap init myReact com.nguoianphu.myReact --web-dir build
        fi
        npx cap add android
        npx cap sync
+       cp -f AndroidManifest.xml android/app/src/main/
 
     - name: Using Capacitor - Grant execute permission for gradlew
       if: runner.os != 'windows'
