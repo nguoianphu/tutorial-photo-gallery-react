@@ -35,36 +35,38 @@ export function usePhotoGallery() {
 
     const takePhoto = async () => {
         // On web, have to use try catch
-        if (!isPlatform('hybrid')) {
-            try {
-                const cameraPhoto = await Camera.getPhoto({
-                    resultType: CameraResultType.Uri,
-                    source: CameraSource.Camera,
-                    quality: 100,
-                    allowEditing: true
-                });
-                const fileName = new Date().getTime() + '.jpeg';
-                const savedFileImage = await savePicture(cameraPhoto, fileName);
-                const newPhotos = [savedFileImage, ...photos];
-                setPhotos(newPhotos);
-                Storage.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) });
-            } catch (error) {
-                console.error(error);
-            }
-        }
-        else {
-            const cameraPhoto = await Camera.getPhoto({
-                resultType: CameraResultType.Uri,
-                source: CameraSource.Camera,
-                quality: 100,
-                allowEditing: true
-            });
-            const fileName = new Date().getTime() + '.jpeg';
-            const savedFileImage = await savePicture(cameraPhoto, fileName);
-            const newPhotos = [savedFileImage, ...photos];
-            setPhotos(newPhotos);
-            Storage.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) });
-        }
+        // if (!isPlatform('hybrid')) {
+        //     try {
+        //         console.log("RUNNING ON WEB");
+        //         const cameraPhoto = await Camera.getPhoto({
+        //             resultType: CameraResultType.Uri,
+        //             source: CameraSource.Camera,
+        //             quality: 100,
+        //             allowEditing: true
+        //         });
+        //         const fileName = new Date().getTime() + '.jpeg';
+        //         const savedFileImage = await savePicture(cameraPhoto, fileName);
+        //         const newPhotos = [savedFileImage, ...photos];
+        //         setPhotos(newPhotos);
+        //         Storage.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) });
+        //     } catch (error) {
+        //         console.error(error);
+        //     }
+        // }
+        // else {
+        //     console.log("NOT ON WEB");
+        const cameraPhoto = await Camera.getPhoto({
+            resultType: CameraResultType.Uri,
+            source: CameraSource.Camera,
+            quality: 100,
+            allowEditing: true
+        });
+        const fileName = new Date().getTime() + '.jpeg';
+        const savedFileImage = await savePicture(cameraPhoto, fileName);
+        const newPhotos = [savedFileImage, ...photos];
+        setPhotos(newPhotos);
+        Storage.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) });
+        // }
     };
 
     const savePicture = async (photo: Photo, fileName: string): Promise<UserPhoto> => {
