@@ -13,7 +13,7 @@ After the user navigates to Tab 2 (Photos), they can tap/click on the camera but
 * UI components: [Ionic Framework](https://ionicframework.com/docs/components)
   * Camera button: [Floating Action Button (FAB)](https://ionicframework.com/docs/api/fab)
   * Photo Gallery display: [Grid](https://ionicframework.com/docs/api/grid)
-  * Delete Photo dialog: [Action Sheet](https://ionicframework.com/docs/api/action-sheet) 
+  * Delete Photo dialog: [Action Sheet](https://ionicframework.com/docs/api/action-sheet)
 * Native runtime: [Capacitor](https://capacitor.ionicframework.com)
   * Taking photos: [Camera API](https://capacitor.ionicframework.com/docs/apis/camera)
   * Writing photo to the filesystem: [Filesystem API](https://capacitor.ionicframework.com/docs/apis/filesystem)
@@ -25,7 +25,7 @@ After the user navigates to Tab 2 (Photos), they can tap/click on the camera but
 
 ## How to Run
 
-> Note: It's highly recommended to follow along with the [tutorial guide](https://ionicframework.com/docs/react/your-first-app), which goes into more depth, but this is the fastest way to run the app. 
+> Note: It's highly recommended to follow along with the [tutorial guide](https://ionicframework.com/docs/react/your-first-app), which goes into more depth, but this is the fastest way to run the app.
 
 0) Install Ionic if needed: `npm install -g @ionic/cli`.
 1) Clone this repository.
@@ -33,3 +33,26 @@ After the user navigates to Tab 2 (Photos), they can tap/click on the camera but
 3) Install all packages: `npm install`.
 4) Run on the web: `ionic serve`.
 5) Run on iOS or Android: See [here](https://ionicframework.com/docs/building/running).
+
+
+
+---
+
+## Development
+
+```
+npm install
+ionic serve
+```
+
+## Production
+
+```
+npm install
+ionic build --prod
+```
+
+__Optimization__
+```
+ionic build --configuration production --aot=true --buildOptimizer=true --optimization=true --common-chunk=true --delete-output-path --source-map=false
+```
