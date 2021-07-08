@@ -93,7 +93,7 @@ jobs:
        fi
        npx cap add android
        npx cap sync
-       cp -f AndroidManifest.xml android/app/src/main/
+       # cp -f AndroidManifest.xml android/app/src/main/
 
     - name: Using Capacitor - Grant execute permission for gradlew
       if: runner.os != 'windows'
