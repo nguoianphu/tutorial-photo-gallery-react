@@ -61,7 +61,7 @@ jobs:
             --aot=true --buildOptimizer=true \
             --optimization=true \
             --common-chunk=true \
-            --delete-output-path \
+            --delete-output-path=true \
             --source-map=false
         zip -r web.zip build
 

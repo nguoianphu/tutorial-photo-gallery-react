@@ -58,6 +58,6 @@ ionic build --configuration production \
     --aot=true --buildOptimizer=true \
     --optimization=true \
     --common-chunk=true \
-    --delete-output-path \
+    --delete-output-path=true \
     --source-map=false
 ```
