@@ -26,4 +26,5 @@ yarn-error.log*
 # Need fresh capacitor folders of android and ios
 
 android
+!android/app/src/main/AndroidManifest.xml
 ios
