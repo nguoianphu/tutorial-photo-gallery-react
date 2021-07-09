@@ -1,6 +1,6 @@
 {
-  "appId": "com.nguoianphu.myReact",
-  "appName": "myReact",
+  "appId": "com.nguoianphu.reaction",
+  "appName": "reaction",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",
