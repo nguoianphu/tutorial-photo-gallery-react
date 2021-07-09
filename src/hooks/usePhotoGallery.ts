@@ -35,7 +35,7 @@ export function usePhotoGallery() {
 
   const takePhoto = async () => {
         // On web, have to use try catch
-        if (!isPlatform('hybrid')) {
+        if (!Capacitor.isNative) {
             try {
     const cameraPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
