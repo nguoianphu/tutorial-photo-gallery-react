@@ -41,23 +41,55 @@ After the user navigates to Tab 2 (Photos), they can tap/click on the camera but
 ## Development
 
 ```
-npm install
-ionic serve
+    npm install
+    ionic serve
+    # or
+    serve -s build
 ```
 
 ## Production
 
 ```
-npm install
-ionic build --prod
+    npm install
+    ionic build --prod
+    # or
+    npm run build --prod
 ```
-
 __Optimization__
 ```
-ionic build --configuration production \
-    --aot=true --buildOptimizer=true \
-    --optimization=true \
-    --common-chunk=true \
-    --delete-output-path=true \
-    --source-map=false
+    ionic build --configuration production \
+        --aot=true --buildOptimizer=true \
+        --optimization=true \
+        --common-chunk=true \
+        --delete-output-path=true \
+        --source-map=false
 ```
+
+## Mobile Development
+
+- Made changes and build
+    ```
+    npm run build
+    ```
+
+- Generate Android
+    ```
+    npx cap init
+    npx cap add android
+    npx cap sync
+    ```
+
+- Build APKs
+    ```
+    cd android
+    ./gradlew assembleDebug
+    ```
+
+- Or open Android studio and import project __android__
+
+- Whenever make changes in source code, running
+
+    ```
+    npm run build && npx cap sync
+    ```
+    And run build by __gradle__ or __Android studio__
