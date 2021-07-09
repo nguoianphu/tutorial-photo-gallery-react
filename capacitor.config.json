@@ -1,6 +1,6 @@
 {
   "appId": "io.ionic.demo.pg.react",
-  "appName": "React",
+  "appName": "react",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "build",

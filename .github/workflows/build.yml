@@ -89,7 +89,7 @@ jobs:
        # rm -rf android || true
        npx cap init
        if [ $? -ne 0 ]; then
-        npx cap init myReact com.nguoianphu.myReact --web-dir build
+        npx cap init react com.nguoianphu.react --web-dir build
        fi
        npx cap add android
        npx cap sync
