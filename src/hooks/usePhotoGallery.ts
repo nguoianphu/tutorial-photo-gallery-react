@@ -63,7 +63,6 @@ export function usePhotoGallery() {
             const newPhotos = [savedFileImage, ...photos];
             setPhotos(newPhotos);
             Storage.set({ key: PHOTO_STORAGE, value: JSON.stringify(newPhotos) });
-  };
         }
     };
 
