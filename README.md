@@ -42,9 +42,13 @@ After the user navigates to Tab 2 (Photos), they can tap/click on the camera but
 
 ```
     npm install
+
+    # Run app on web with port 5000
     ionic serve
-    # or
+    # or port 5000
     serve -s build
+    # or run it by python quickly
+    python -m http.server --directory build 5000
 ```
 
 ## Production
