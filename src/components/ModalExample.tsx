@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IonModal, IonButton, IonContent, createAnimation } from '@ionic/react';
+import { IonModal, IonButton, createAnimation } from '@ionic/react';
 
 interface ContainerProps {
     name: string;
@@ -32,18 +32,13 @@ export const ModalExample: React.FC<ContainerProps> = () => {
     }
 
     return (
-
-        <IonContent>
-            <div className="container">
-                <IonModal isOpen={showModal} enterAnimation={enterAnimation} leaveAnimation={leaveAnimation}>
-
-                    <p>This is modal content</p>
-
-                    <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
-                </IonModal>
-                <IonButton onClick={() => setShowModal(true)}>Show Modal</IonButton>
-            </div>
-        </IonContent>
+        <div className="container">
+            <IonModal isOpen={showModal} enterAnimation={enterAnimation} leaveAnimation={leaveAnimation}>
+                <p>This is modal content</p>
+                <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
+            </IonModal>
+            <IonButton onClick={() => setShowModal(true)}>Show Modal</IonButton>
+        </div>
 
     );
 };
