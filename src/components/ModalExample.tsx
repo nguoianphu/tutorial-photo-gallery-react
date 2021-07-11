@@ -32,15 +32,15 @@ export const ModalExample: React.FC<ContainerProps> = () => {
     }
 
     return (
-        <div className="container">
+        <div>
             <IonModal isOpen={showModal} enterAnimation={enterAnimation} leaveAnimation={leaveAnimation}>
                 <p>This is modal content</p>
-                <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
+                <IonButton onClick={() => setShowModal(false)} expand="block">Close Modal</IonButton>
             </IonModal>
-            <IonButton onClick={() => setShowModal(true)}>Show Modal</IonButton>
+            <IonButton onClick={() => setShowModal(true)} expand="block">Show Modal</IonButton>
         </div>
 
-    );
+    )
 };
 
 export default ModalExample;

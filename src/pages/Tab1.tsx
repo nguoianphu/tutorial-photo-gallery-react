@@ -1,7 +1,8 @@
 import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ModalExample from '../components/ModalExample';
 import './Tab1.css';
+import ModalExample from '../components/ModalExample';
+import { ActionSheetExample } from '../components/ActionSheet';
 
 const Tab1: React.FC = () => {
     return (
@@ -17,6 +18,7 @@ const Tab1: React.FC = () => {
                         <IonTitle size="large">Tab 1</IonTitle>
                     </IonToolbar>
                 </IonHeader>
+                <ActionSheetExample name="Action Sheet" />
                 <ModalExample name="Animation" />
             </IonContent>
         </IonPage>
