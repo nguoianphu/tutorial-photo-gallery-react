@@ -11,7 +11,7 @@ export const ActionSheetExample: React.FC<ContainerProps> = () => {
 
     return (
         <div>
-            <IonButton onClick={() => setShowActionSheet(true)} expand="block">
+            <IonButton onClick={() => setShowActionSheet(true)} expand="block" color="success" shape="round" fill="outline" size="small" slot="start">
                 Show Action Sheet
             </IonButton>
             <IonActionSheet
