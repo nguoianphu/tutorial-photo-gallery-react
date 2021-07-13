@@ -97,3 +97,15 @@ __Optimization__
     npm run build && npx cap sync
     ```
     And run build by __gradle__ or __Android studio__
+
+
+- Run app on Android Emulator without using Android Studio
+
+```
+    # Windows
+    set PATH=%PATH%;D:\myname\android\androidSDK\platform-tools;D:\myname\android\androidSDK\tools\bin;D:\myname\android\androidSDK\emulator
+
+    emulator -avd Pixel_3_API_30
+
+    adb install app-debug.apk
+```
