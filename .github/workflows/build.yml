@@ -34,7 +34,7 @@ jobs:
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'
+        node-version: '14'
 
 
     - name: set up JDK 8
@@ -54,7 +54,12 @@ jobs:
         npm install -g @ionic/cli cordova
         npm install @capacitor/core @capacitor/cli @capacitor/android
 
-    - name: Build web
+    - name: Build web in dev mode
+      if: runner.os != 'windows'
+      run: |
+        npm run build
+
+    - name: Build web in production mode
       if: runner.os != 'windows'
       run: |
         ionic build --configuration production \
@@ -86,7 +91,6 @@ jobs:
 
     - name: Using Capacitor to generate android project
       run: |
-       # rm -rf android || true
        npx cap init
        if [ $? -ne 0 ]; then
         npx cap init react com.nguoianphu.react --web-dir build
