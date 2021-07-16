@@ -51,8 +51,7 @@ jobs:
       if: runner.os != 'windows'
       run: |
         npm install
-        npm install -g @ionic/cli cordova
-        npm install @capacitor/core @capacitor/cli @capacitor/android
+        npm install -g @ionic/cli
 
     - name: Build web in dev mode
       if: runner.os != 'windows'
@@ -70,24 +69,6 @@ jobs:
             --source-map=false
         zip -r web.zip build
 
-    # - name: Using Cordova to build app
-    #   run: |
-    #    cp -R build www
-    #    cd www
-    #    # Add android platform to the project and remember that in config.xml & package.json.
-    #    cordova platform rm android || true
-    #    cordova platform add android
-    #    # Check to see if your system is configured for building android platform.
-    #    cordova requirements android
-    #    # Build the android and emit verbose logs.
-    #    cordova build android --debug --verbose
-    #    # Build for android platform in release mode
-    #    cordova build android --release --verbose
-    #    # Build an Android App Bundle (.aab) file
-    #    cordova build android --release --verbose -- --packageType=bundle
-    #    mv $GITHUB_WORKSPACE/platforms/android/app/build/outputs/apk/debug/app-debug.apk $GITHUB_WORKSPACE/platforms/android/app/build/outputs/apk/debug/app-debug-cordova.apk
-    #    mv $GITHUB_WORKSPACE/platforms/android/app/build/outputs/bundle/release/app-release.aab $GITHUB_WORKSPACE/platforms/android/app/build/outputs/bundle/release/app-release-cordova.aab
-    #    # Clean up www so capacitor steps would work properly
 
     - name: Using Capacitor to generate android project
       run: |
@@ -162,9 +143,6 @@ jobs:
        ./zipalign -v 4 \
            $GITHUB_WORKSPACE/android/app/build/outputs/apk/release/app-release-unsigned.apk \
            $GITHUB_WORKSPACE/android/app/build/outputs/apk/release/app-release-unsigned-aligned.apk
-       # ./zipalign -v 4 \
-       #     $GITHUB_WORKSPACE/platforms/android/app/build/outputs/apk/release/app-release-unsigned.apk \
-       #     $GITHUB_WORKSPACE/platforms/android/app/build/outputs/apk/release/app-release-unsigned-aligned-cordova.apk
 
        echo "Sign your APK with your private key using apksigner"
        ./apksigner sign \
@@ -174,20 +152,12 @@ jobs:
            --key-pass pass:${MY_ZIP_PASSWORD} \
            --out $GITHUB_WORKSPACE/android/app/build/outputs/apk/release/app-release.apk \
            $GITHUB_WORKSPACE/android/app/build/outputs/apk/release/app-release-unsigned-aligned.apk
-       # ./apksigner sign \
-       #     --ks $GITHUB_WORKSPACE/keys/my-android-release-key.keystore \
-       #     --ks-key-alias my-android-release-key \
-       #     --ks-pass pass:${MY_ZIP_PASSWORD} \
-       #     --key-pass pass:${MY_ZIP_PASSWORD} \
-       #     --out $GITHUB_WORKSPACE/platforms/android/app/build/outputs/apk/release/app-release-cordova.apk \
-       #     $GITHUB_WORKSPACE/platforms/android/app/build/outputs/apk/release/app-release-unsigned-aligned-cordova.apk
 
        echo "Verify that your APK is signed \
                to confirm that an APK's signature \
                will be verified successfully \
                on all versions of the Android platform supported by the APK"
        ./apksigner verify --verbose --print-certs $GITHUB_WORKSPACE/android/app/build/outputs/apk/release/app-release.apk
-       # ./apksigner verify --verbose --print-certs $GITHUB_WORKSPACE/platforms/android/app/build/outputs/apk/release/app-release-cordova.apk
 
        cd $GITHUB_WORKSPACE/android
        echo "Sign Android App Bundle by jarsigner"
@@ -196,10 +166,6 @@ jobs:
            -keypass ${MY_ZIP_PASSWORD} \
            -keystore $GITHUB_WORKSPACE/keys/my-android-release-key.keystore \
            app/build/outputs/bundle/release/app-release.aab my-android-release-key
-       # jarsigner -storepass ${MY_ZIP_PASSWORD} \
-       #     -keypass ${MY_ZIP_PASSWORD} \
-       #     -keystore $GITHUB_WORKSPACE/keys/my-android-release-key.keystore \
-       #     $GITHUB_WORKSPACE/platforms/android/app/build/outputs/bundle/release/app-release-cordova.aab my-android-release-key
 
        echo "zip keys and certificates with password"
        cd $GITHUB_WORKSPACE
@@ -236,29 +202,18 @@ jobs:
           ./android/app/build/outputs/apk/release/app-release.apk
           ./android/app/build/outputs/apk/debug/app-debug.apk
           ./android/app/build/outputs/bundle/release/app-release.aab
-          # ./platforms/android/app/build/outputs/apk/debug/app-debug-cordova.apk
-          # ./platforms/android/app/build/outputs/apk/release/app-release-cordova.apk
-          # ./platforms/android/app/build/outputs/bundle/release/app-release-cordova.aab
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - uses: actions/upload-artifact@v2
       with:
-       name: CapacitorAPK
+       name: CapacitorAPKs
        retention-days: 3
        path: |
         ./android/app/build/outputs/apk/debug/
         ./android/app/build/outputs/apk/release/
         ./android/app/build/outputs/bundle/release/
 
-    # - uses: actions/upload-artifact@v2
-    #   with:
-    #    name: CordovaAPK
-    #    retention-days: 3
-    #    path: |
-    #     ./platforms/android/app/build/outputs/apk/debug/
-    #     ./platforms/android/app/build/outputs/apk/release/
-    #     ./platforms/android/app/build/outputs/bundle/release/
 
     - uses: actions/upload-artifact@v2
       with:
